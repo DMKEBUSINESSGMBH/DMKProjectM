@@ -163,6 +163,8 @@ class DMKProjectMTaskBundleInstaller implements
         $table->addColumn('task_priority_name', 'string', ['notnull' => false, 'length' => 32]);
         $table->addColumn('owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
+        $table->addColumn('parent_id', 'integer', ['notnull' => false]);
+        $table->addColumn('project', 'integer', ['notnull' => false]);
         $table->addColumn('createdAt', 'datetime', []);
         $table->addColumn('updatedAt', 'datetime', []);
 
@@ -172,6 +174,9 @@ class DMKProjectMTaskBundleInstaller implements
         $table->addIndex(['organization_id'], 'idx_55bc040632c8a3de', []);
         $table->addIndex(['due_date'], 'task_due_date_idx');
         $table->addIndex(['start_date'], 'pmtask_start_date_idx', []);
+
+        $table->addIndex(['parent_id'], 'idx_55BC0406727ACA70', []);
+        $table->addIndex(['project'], 'idx_55BC04062FB3D0EE', []);
 
         $table->addIndex(['updatedAt'], 'task_updated_at_idx', []);
     }
@@ -205,7 +210,7 @@ class DMKProjectMTaskBundleInstaller implements
             $schema->getTable('projectm_task'),
             ['parent_id'],
             ['id'],
-            ['onUpdate' => null, 'onDelete' => 'SET NULL']
+            ['onUpdate' => null, 'onDelete' => 'CASCADE']
             );
         $table->addForeignKeyConstraint(
             $schema->getTable('projectm_task_priority'),
