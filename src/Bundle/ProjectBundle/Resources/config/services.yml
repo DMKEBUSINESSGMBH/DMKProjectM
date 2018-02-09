@@ -1,0 +1,10 @@
+parameters:
+    projectm.project.project.class: DMKProjectM\Bundle\ProjectBundle\Entity\Project
+
+services:
+    projectm.project.project.manager:
+        class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
+        parent: oro_soap.manager.entity_manager.abstract
+        arguments:
+            - '%projectm.project.project.class%'
+            - "@doctrine.orm.entity_manager"

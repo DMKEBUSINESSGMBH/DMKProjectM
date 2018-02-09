@@ -1,0 +1,3 @@
+projectm_project_bundle:
+    resource:     "@DMKProjectMProjectBundle/Controller/"
+    type:         annotation    prefix:       /projectm/project
