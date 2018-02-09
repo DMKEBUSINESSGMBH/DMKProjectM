@@ -22,10 +22,13 @@ use Oro\Bundle\SoapBundle\Request\Parameters\Filter\IdentifierToReferenceFilter;
 
 /**
  * @RouteResource("task")
- * @NamePrefix("dmkprojectm_api_")
+ * @NamePrefix("oro_api_projectm_")
  */
 class TaskController extends RestController implements ClassResourceInterface
 {
+    const FIELD_WORKFLOW_ITEM = 'workflowItem';
+    const FIELD_WORKFLOW_STEP = 'workflowStep';
+
     /**
      * REST GET list
      *
@@ -199,12 +202,6 @@ class TaskController extends RestController implements ClassResourceInterface
                 }
                 break;
             case 'owner':
-            case 'workflowItem':
-            case 'workflowStep':
-                if ($value) {
-                    $value = $value->getId();
-                }
-                break;
             default:
                 parent::transformEntityField($field, $value);
         }
@@ -221,5 +218,27 @@ class TaskController extends RestController implements ClassResourceInterface
         unset($data['updatedAt']);
 
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getPreparedItem($entity, $resultFields = [])
+    {
+        $entityData = parent::getPreparedItem($entity, $resultFields);
+        $workflowItems = $this->container->get('oro_workflow.manager')->getWorkflowItemsByEntity($entity);
+        if (0 !== count($workflowItems)) {
+            /** @var WorkflowItem $workflowItem */
+            $workflowItem = array_shift($workflowItems);
+            if (!$resultFields || in_array(self::FIELD_WORKFLOW_ITEM, $resultFields, true)) {
+                $entityData[self::FIELD_WORKFLOW_ITEM] = $workflowItem->getId();
+            }
+            $workflowStep = $workflowItem->getCurrentStep();
+            if ($workflowStep && (!$resultFields || in_array(self::FIELD_WORKFLOW_STEP, $resultFields, true))) {
+                $entityData[self::FIELD_WORKFLOW_STEP] = $workflowStep->getId();
+            }
+        }
+
+        return $entityData;
     }
 }

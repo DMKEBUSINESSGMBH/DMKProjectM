@@ -3,6 +3,7 @@ parameters:
     projectm_task.form.type.task_api.class:           DMKProjectM\Bundle\TaskBundle\Form\Type\TaskApiType
     projectm_task.form.handler.task.class:            DMKProjectM\Bundle\TaskBundle\Form\Handler\TaskHandler
     projectm_task.form.handler.task_api.class:        DMKProjectM\Bundle\TaskBundle\Form\Handler\TaskApiHandler
+    projectm_task.manager.api.class:                  Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
 
 services:
     projectm_task.form.type.task:
@@ -58,11 +59,10 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@oro_entity.routing_helper"
 
-    projectm_task.form.handler.task_api.soap:
-        class: %projectm_task.form.handler.task_api.class%
-        scope: request
+    projectm_task.manager.api:
+        class: %projectm_task.manager.api.class%
+        parent: oro_soap.manager.entity_manager.abstract
         arguments:
-            - "@projectm_task.form.api.soap"
-            - "@request"
+            - %projectm_task.entity.class%
             - "@doctrine.orm.entity_manager"
-            - "@oro_entity.routing_helper"
+
