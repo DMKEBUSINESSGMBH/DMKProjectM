@@ -1,0 +1,12 @@
+services:
+    projectm.project.project.form.type:
+        class: DMKProjectM\Bundle\ProjectBundle\Form\Type\ProjectType
+        tags:
+            - { name: form.type, alias: "projectm_project" }
+
+    projectm.project.project.form:
+        class: Symfony\Component\Form\Form
+        factory: ['@form.factory', createNamed]
+        arguments:
+            - "projectm_project_form"
+            - "projectm_project"

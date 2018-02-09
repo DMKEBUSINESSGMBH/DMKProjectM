@@ -1,0 +1,27 @@
+datagrids:
+    projectm-project-project-grid:
+        extended_entity_name: DMKProjectMProjectBundle:Project
+        acl_resource: projectm_project_project_view
+        source:
+            type: orm
+            query:
+                select:
+                    - p.id
+                    - p.name
+                    - p.description
+                    - p.isActive
+                from:
+                    - { table: DMKProjectMProjectBundle:Project, alias: p }
+        columns:
+            id:
+                label: dmkprojectm.project.id.label
+            name:
+                label: dmkprojectm.project.name.label
+            description:
+                label: dmkprojectm.project.description.label
+            isActive:
+                label: dmkprojectm.project.is_active.label
+        sorters:
+            columns:
+                name:
+                    data_name: p.name

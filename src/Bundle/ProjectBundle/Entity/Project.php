@@ -47,7 +47,7 @@ class Project extends ExtendProject
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    protected $name;
+    protected $name = '';
 
     /**
      * @var string|null

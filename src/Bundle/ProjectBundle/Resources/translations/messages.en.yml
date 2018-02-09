@@ -8,3 +8,4 @@ dmkprojectm:
         id.label: Id
         owner.label: Owner
         organization.label: Organization
+        create_entity: Create Project

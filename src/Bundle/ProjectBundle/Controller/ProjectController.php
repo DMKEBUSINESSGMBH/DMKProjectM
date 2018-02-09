@@ -79,8 +79,8 @@ class ProjectController extends Controller
     private function update(Project $project)
     {
         return $this->get('oro_form.update_handler')->update(
-            $customer,
-            $this->get(''),
+            $project,
+            $this->get('projectm.project.project.form'),
 //            $this->get('translator')->trans('')
             'SAVED'
         );
