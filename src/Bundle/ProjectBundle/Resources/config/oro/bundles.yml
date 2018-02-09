@@ -1,0 +1,2 @@
+bundles:
+    - { name: DMKProjectM\Bundle\ProjectBundle\DMKProjectMProjectBundle, priority: 100 }

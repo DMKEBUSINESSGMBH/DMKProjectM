@@ -1,0 +1,11 @@
+navigation:
+    menu_config:
+        items:
+            dmkprojectm_tab:
+                uri: '#'
+                label: 'ProjectM'
+                position: 10
+        tree:
+            application_menu:
+                children:
+                    dmkprojectm_tab:
