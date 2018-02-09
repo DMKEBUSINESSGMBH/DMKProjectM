@@ -1,0 +1,11 @@
+/.settings
+/.buildpath
+/.project
+/.idea
+/vendor
+build/
+/nbproject/
+components/
+composer.lock
+/coveragey
+

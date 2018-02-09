@@ -1,0 +1,56 @@
+{
+    "name": "dmk/dmkprojectm",
+    "description": "Project management tool for OroCRM",
+    "homepage": "https://github.com/RocKordier/OroBasicsBundle",
+    "keywords": ["Oro Platform", "Symfony2", "Project"],
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name" : "DMK E-BUSINESS GmbH",
+            "homepage" : "http://www.dmk-ebusiness.de"
+        },
+        {
+            "name": "[RocKordier] Eric Hertwig",
+            "homepage": "http://eric-hertwig.de",
+            "email": "eric@ehdev.de"
+        },
+        {
+            "name": "[digedag] René Nitzsche",
+            "email": "nitzsche@dmk-ebusiness.de"
+        },
+        {
+            "name": "[BenjaminQuandt] Benjamin Quandt"
+        }
+    ],
+    "repositories": {
+        "oro": {
+            "type": "composer",
+            "url": "https://packagist.orocrm.com"
+        },
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.orocrm.com"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "DMKProjectM\\": ["src/", "tests/"]
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "oro/platform": "~2.6",
+        "ehdev/oro-basics-bundle": "^0.0.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "ehdev/ciutility": "^0.0.1"
+    },
+    "config" : {
+        "fxp-asset" : {
+            "enabled" : false
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
