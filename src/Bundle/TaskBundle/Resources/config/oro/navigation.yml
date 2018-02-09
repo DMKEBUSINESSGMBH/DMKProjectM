@@ -2,12 +2,12 @@ navigation:
     menu_config:
         items:
             projectm_task_list:
-                label: 'oro.task.entity_plural_label'
+                label: 'dmkprojectm.task.entity_plural_label'
                 route: 'projectm_task_index'
                 position: 10
                 extras:
                     routes: ['projectm_task_update', 'projectm_task_create', 'projectm_task_view']
-                    description: 'Beschreibung'
+                    description: 'dmkprojectm.task.entity_description'
 
         tree:
             application_menu:

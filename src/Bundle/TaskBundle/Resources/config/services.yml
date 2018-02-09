@@ -1,0 +1,77 @@
+parameters:
+    projectm_task.entity.class:                       DMKProjectM\Bundle\TaskBundle\Entity\Task
+    projectm_task.listener.datagrid.user_tasks.class: DMKProjectM\Bundle\TaskBundle\EventListener\Datagrid\UserTaskGridListener
+    projectm_task.listener.datagrid.activity.class:   DMKProjectM\Bundle\TaskBundle\EventListener\Datagrid\ActivityGridListener
+    projectm_task.calendar_provider.class:            DMKProjectM\Bundle\TaskBundle\Provider\TaskCalendarProvider
+    projectm_task.task.normalizer.class:              DMKProjectM\Bundle\TaskBundle\Provider\TaskCalendarNormalizer
+    projectm_task.placeholder.filter.class:           DMKProjectM\Bundle\TaskBundle\Placeholder\PlaceholderFilter
+    projectm_task.activity_list.provider.class:       DMKProjectM\Bundle\TaskBundle\Provider\TaskActivityListProvider
+    projectm_task.validator.due_date_required.class:  DMKProjectM\Bundle\TaskBundle\Validator\DueDateRequiredValidator
+
+services:
+#    projectm_task.listener.datagrid.user_tasks:
+#        class: %projectm_task.listener.datagrid.user_tasks.class%
+#        arguments:
+#            - "@oro_security.token_accessor"
+#        tags:
+#            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.user-tasks-grid, method: onBuildBefore }
+#            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.after.user-tasks-grid, method: onBuildAfter }
+
+#    projectm_task.listener.datagrid.activity:
+#        class: %projectm_task.listener.datagrid.activity.class%
+#        arguments:
+#            - "@oro_activity.manager"
+#            - "@oro_entity.routing_helper"
+#        tags:
+#            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.after.activity-tasks-grid, method: onBuildAfter }
+
+    projectm_task.widget_provider.actions.assign_task:
+        parent: oro_ui.widget_provider.action_button.abstract
+        arguments:
+            - oro_assign_task_button
+            - oro_assign_task_link
+        tags:
+            - { name: oro_ui.view_action_provider, group: activity }
+
+    projectm_task.calendar_provider:
+        class: %projectm_task.calendar_provider.class%
+        arguments:
+            - "@oro_entity.doctrine_helper"
+            - "@oro_security.acl_helper"
+            - "@projectm_task.task.normalizer"
+            - "@translator"
+            - %projectm_task.calendar_provider.my_tasks.enabled%
+        tags:
+            - { name: oro_calendar.calendar_provider, alias: tasks }
+
+    projectm_task.task.normalizer:
+        class: %projectm_task.task.normalizer.class%
+        arguments:
+            - "@oro_reminder.entity.manager"
+
+    projectm_task.placeholder.filter:
+        class: %projectm_task.placeholder.filter.class%
+        arguments:
+            - %projectm_task.calendar_provider.my_tasks.enabled%
+
+    projectm_task.activity_list.provider:
+        class: %projectm_task.activity_list.provider.class%
+        arguments:
+           - "@oro_entity.doctrine_helper"
+           - "@oro_security.owner.entity_owner_accessor.link"
+           - "@oro_activity.association_helper"
+           - "@oro_comment.association_helper"
+        tags:
+           - {name: oro_activity_list.provider, priority: 20}
+
+    projectm_task.validator.due_date_required:
+        class: %projectm_task.validator.due_date_required.class%
+        tags:
+           - { name: validator.constraint_validator, alias: projectm_task.due_date_required_validator }
+
+#    projectm_task.set_created_by_listener.listener:
+#        class: DMKProjectM\Bundle\TaskBundle\EventListener\SetCreatedByListener
+#        arguments:
+#            - '@security.token_storage'
+#        tags:
+#            - { name: doctrine.orm.entity_listener, entity: '%projectm_task.entity.class%', event: prePersist }
