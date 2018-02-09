@@ -53,7 +53,6 @@ use DMKProjectM\Bundle\TaskBundle\Model\ExtendTask;
  *              "auditable"=true
  *          },
  *          "workflow"={
- *              "active_workflow"="task_flow",
  *              "show_step_in_grid"=false
  *          },
  *          "reminder"={
@@ -170,6 +169,36 @@ class Task extends ExtendTask implements RemindableInterface, DatesAwareInterfac
     protected $taskPriority;
 
     /**
+     * @var Task
+     *
+     * @ORM\ManyToOne(targetEntity="DMKProjectM\Bundle\TaskBundle\Entity\Task")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ConfigField(
+     *      defaultValues={
+     *          "dataaudit"={
+     *              "auditable"=true
+     *          }
+     *      }
+     * )
+     */
+    protected $parent;
+
+    /**
+     * @var Task
+     *
+     * @ORM\ManyToOne(targetEntity="DMKProjectM\Bundle\ProjectBundle\Entity\Project")
+     * @ORM\JoinColumn(name="project", referencedColumnName="id", onDelete="SET NULL")
+     * @ConfigField(
+     *      defaultValues={
+     *          "dataaudit"={
+     *              "auditable"=true
+     *          }
+     *      }
+     * )
+     */
+    protected $project;
+
+    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
@@ -183,22 +212,6 @@ class Task extends ExtendTask implements RemindableInterface, DatesAwareInterfac
      * )
      */
     protected $owner;
-
-    /**
-     * @var WorkflowItem
-     *
-     * @ORM\OneToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowItem")
-     * @ORM\JoinColumn(name="workflow_item_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $workflowItem;
-
-    /**
-     * @var WorkflowStep
-     *
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowStep")
-     * @ORM\JoinColumn(name="workflow_step_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $workflowStep;
 
     /**
      * @var Collection
@@ -387,46 +400,6 @@ class Task extends ExtendTask implements RemindableInterface, DatesAwareInterfac
     public function setOwner($owner = null)
     {
         $this->owner = $owner;
-    }
-
-    /**
-     * @return string
-     */
-    public function getWorkflowStepName()
-    {
-        return $this->getWorkflowStep() ? $this->getWorkflowStep()->getName() : null;
-    }
-
-    /**
-     * @param WorkflowItem $workflowItem
-     */
-    public function setWorkflowItem($workflowItem)
-    {
-        $this->workflowItem = $workflowItem;
-    }
-
-    /**
-     * @return WorkflowItem
-     */
-    public function getWorkflowItem()
-    {
-        return $this->workflowItem;
-    }
-
-    /**
-     * @param WorkflowItem $workflowStep
-     */
-    public function setWorkflowStep($workflowStep)
-    {
-        $this->workflowStep = $workflowStep;
-    }
-
-    /**
-     * @return WorkflowStep
-     */
-    public function getWorkflowStep()
-    {
-        return $this->workflowStep;
     }
 
     /**

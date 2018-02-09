@@ -163,8 +163,6 @@ class DMKProjectMTaskBundleInstaller implements
         $table->addColumn('task_priority_name', 'string', ['notnull' => false, 'length' => 32]);
         $table->addColumn('owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
-        $table->addColumn('workflow_item_id', 'integer', ['notnull' => false]);
-        $table->addColumn('workflow_step_id', 'integer', ['notnull' => false]);
         $table->addColumn('createdAt', 'datetime', []);
         $table->addColumn('updatedAt', 'datetime', []);
 
@@ -175,8 +173,6 @@ class DMKProjectMTaskBundleInstaller implements
         $table->addIndex(['due_date'], 'task_due_date_idx');
         $table->addIndex(['start_date'], 'pmtask_start_date_idx', []);
 
-        $table->addUniqueIndex(['workflow_item_id'], 'uniq_55bc04061023c4ee');
-        $table->addIndex(['workflow_step_id'], 'idx_55bc040671fe882c', []);
         $table->addIndex(['updatedAt'], 'task_updated_at_idx', []);
     }
 
@@ -200,6 +196,18 @@ class DMKProjectMTaskBundleInstaller implements
     {
         $table = $schema->getTable('projectm_task');
         $table->addForeignKeyConstraint(
+            $schema->getTable('projectm_project'),
+            ['project'],
+            ['id'],
+            ['onUpdate' => null, 'onDelete' => 'SET NULL']
+            );
+        $table->addForeignKeyConstraint(
+            $schema->getTable('projectm_task'),
+            ['parent_id'],
+            ['id'],
+            ['onUpdate' => null, 'onDelete' => 'SET NULL']
+            );
+        $table->addForeignKeyConstraint(
             $schema->getTable('projectm_task_priority'),
             ['task_priority_name'],
             ['name'],
@@ -216,18 +224,6 @@ class DMKProjectMTaskBundleInstaller implements
             ['organization_id'],
             ['id'],
             ['onDelete' => 'SET NULL', 'onUpdate' => null]
-        );
-        $table->addForeignKeyConstraint(
-            $schema->getTable('oro_workflow_item'),
-            ['workflow_item_id'],
-            ['id'],
-            ['onDelete' => 'SET NULL']
-        );
-        $table->addForeignKeyConstraint(
-            $schema->getTable('oro_workflow_step'),
-            ['workflow_step_id'],
-            ['id'],
-            ['onDelete' => 'SET NULL']
         );
     }
 }
