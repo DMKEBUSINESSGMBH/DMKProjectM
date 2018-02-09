@@ -55,7 +55,7 @@ class TaskType extends AbstractType
                 'translatable_entity',
                 [
                     'label' => 'orocrm.task.task_priority.label',
-                    'class' => 'OroCRM\Bundle\TaskBundle\Entity\TaskPriority',
+                    'class' => 'DMKProjectM\Bundle\TaskBundle\Entity\TaskPriority',
                     'required' => true,
                     'query_builder' => function (EntityRepository $repository) {
                         return $repository->createQueryBuilder('priority')->orderBy('priority.order');

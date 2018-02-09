@@ -1,0 +1,68 @@
+parameters:
+    projectm_task.form.type.task.class:               Oro\Bundle\TaskBundle\Form\Type\TaskType
+    projectm_task.form.type.task_api.class:           Oro\Bundle\TaskBundle\Form\Type\TaskApiType
+    projectm_task.form.handler.task.class:            Oro\Bundle\TaskBundle\Form\Handler\TaskHandler
+    projectm_task.form.handler.task_api.class:        Oro\Bundle\TaskBundle\Form\Handler\TaskApiHandler
+
+services:
+    projectm_task.form.type.task:
+        class: %projectm_task.form.type.task.class%
+        tags:
+            - { name: form.type, alias: projectm_task }
+
+    projectm_task.form.type.task_api:
+        class: %projectm_task.form.type.task_api.class%
+        tags:
+            - { name: form.type, alias: task }
+
+    projectm_task.form:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - 'projectm_task'
+            - 'projectm_task'
+
+    projectm_task.form.api:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - ~
+            - 'task'
+
+    projectm_task.form.api.soap:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - 'task'
+            - 'task'
+
+    projectm_task.form.handler.task:
+        class: %projectm_task.form.handler.task.class%
+        scope: request
+        arguments:
+            - "@projectm_task.form"
+            - "@request"
+            - "@doctrine.orm.entity_manager"
+            - "@oro_activity.manager"
+            - "@oro_entity.routing_helper"
+
+    projectm_task.form.handler.task_api:
+        class: %projectm_task.form.handler.task_api.class%
+        scope: request
+        arguments:
+            - "@projectm_task.form.api"
+            - "@request"
+            - "@doctrine.orm.entity_manager"
+            - "@oro_entity.routing_helper"
+
+    projectm_task.form.handler.task_api.soap:
+        class: %projectm_task.form.handler.task_api.class%
+        scope: request
+        arguments:
+            - "@projectm_task.form.api.soap"
+            - "@request"
+            - "@doctrine.orm.entity_manager"
+            - "@oro_entity.routing_helper"

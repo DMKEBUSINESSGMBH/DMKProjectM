@@ -29,7 +29,7 @@ use DMKProjectM\Bundle\TaskBundle\Model\ExtendTask;
  *      }
  * )
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Entity(repositoryClass="OroCRM\Bundle\TaskBundle\Entity\Repository\TaskRepository")
+ * @ORM\Entity(repositoryClass="DMKProjectM\Bundle\TaskBundle\Entity\Repository\TaskRepository")
  * @Config(
  *      routeName="projectm_task_index",
  *      routeView="projectm_task_view",

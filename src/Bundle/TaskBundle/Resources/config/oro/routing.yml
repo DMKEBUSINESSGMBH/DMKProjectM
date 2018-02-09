@@ -3,7 +3,7 @@ projectm_task_bundle:
     type:         annotation
     prefix:       /projectm
 
-orocrm_task_bundle_api:
+projectm_task_bundle_api:
     resource:     "@DMKProjectMTaskBundle/Controller/Api/Rest/TaskController.php"
     type:         rest
     prefix:       api/rest/{version}
