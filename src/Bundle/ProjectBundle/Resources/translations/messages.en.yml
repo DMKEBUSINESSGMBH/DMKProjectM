@@ -1,0 +1,10 @@
+dmkprojectm:
+    project:
+        entity_label: Project
+        entity_plural_label: Projects
+        name.label: Name
+        description.label: Description
+        is_active.label: Active?
+        id.label: Id
+        owner.label: Owner
+        organization.label: Organization
