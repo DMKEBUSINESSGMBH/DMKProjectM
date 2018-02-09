@@ -81,8 +81,10 @@ use DMKProjectM\Bundle\TaskBundle\Model\ExtendTask;
  */
 class Task extends ExtendTask implements RemindableInterface, DatesAwareInterface
 {
+    const INTERNAL_ENUM_CODE_TYPE = 'projectm_tasktype';
+    const INTERNAL_ENUM_CODE_STATUS = 'projectm_taskstatus';
     const TYPE_TASK = 'task';
-    const TYPE_TASK = 'milestone';
+    const TYPE_MILESTONE = 'milestone';
     const STATUS_OPEN = 'open';
     const STATUS_IN_PROGRESS = 'in_progress';
     const STATUS_CLOSED = 'closed';

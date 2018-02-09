@@ -14,6 +14,10 @@ use Oro\Bundle\MigrationBundle\Migration\Installation;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 use OroCRM\Bundle\TaskBundle\Migrations\Schema\v1_9\AddActivityAssociations;
 use OroCRM\Bundle\TaskBundle\Migrations\Schema\v1_11_1\AddTaskStatusField;
+use DMKProjectM\Bundle\TaskBundle\Entity\Task;
+use Oro\Bundle\EntityExtendBundle\EntityConfig\ExtendScope;
+use Oro\Bundle\EntityBundle\EntityConfig\DatagridScope;
+use Oro\Bundle\EntityExtendBundle\Migration\OroOptions;
 
 class DMKProjectMTaskBundleInstaller implements
     Installation,
@@ -78,8 +82,59 @@ class DMKProjectMTaskBundleInstaller implements
         $this->comment->addCommentAssociation($schema, 'projectm_task');
 
         self::addActivityAssociations($schema, $this->activityExtension);
-        AddTaskStatusField::addTaskStatusField($schema, $this->extendExtension);
-        AddTaskStatusField::addEnumValues($queries, $this->extendExtension);
+        self::addTaskStatusField($schema, $this->extendExtension);
+        self::addTaskTypeField($schema, $this->extendExtension);
+    }
+
+    public static function addTaskStatusField(Schema $schema, ExtendExtension $extendExtension)
+    {
+        $enumTable = $extendExtension->addEnumField(
+            $schema,
+            'projectm_task',
+            'status',
+            Task::INTERNAL_ENUM_CODE_STATUS,
+            false,
+            false,
+            [
+                'extend' => ['owner' => ExtendScope::OWNER_SYSTEM],
+                'datagrid' => ['is_visible' => DatagridScope::IS_VISIBLE_TRUE],
+                'dataaudit' => ['auditable' => true],
+                'importexport' => ["order" => 120, "short" => true]
+            ]
+        );
+        $options = new OroOptions();
+        $options->set('enum', 'immutable_codes', [
+            Task::STATUS_OPEN,
+            Task::STATUS_IN_PROGRESS,
+            Task::STATUS_CLOSED
+        ]);
+
+        $enumTable->addOption(OroOptions::KEY, $options);
+    }
+    public static function addTaskTypeField(Schema $schema, ExtendExtension $extendExtension)
+    {
+        $enumTable = $extendExtension->addEnumField(
+            $schema,
+            'projectm_task',
+            'tasktype',
+            Task::INTERNAL_ENUM_CODE_TYPE,
+            false,
+            false,
+            [
+                'extend' => ['owner' => ExtendScope::OWNER_SYSTEM],
+                'datagrid' => ['is_visible' => DatagridScope::IS_VISIBLE_TRUE],
+                'dataaudit' => ['auditable' => true],
+                'importexport' => ["order" => 130, "short" => true]
+            ]
+            );
+        $options = new OroOptions();
+        $options->set('enum', 'immutable_codes', [
+            Task::TYPE_MILESTONE,
+            Task::TYPE_TASK,
+        ]);
+
+        $enumTable->addOption(OroOptions::KEY, $options);
+
     }
 
     /**

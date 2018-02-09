@@ -8,7 +8,7 @@ class LoadTaskStatusEnum extends AbstractEnumFixture
 {
     protected function getEnumCode()
     {
-        return Task::STATUS_OPEN;
+        return Task::INTERNAL_ENUM_CODE_STATUS;
     }
 
     protected function getData()
