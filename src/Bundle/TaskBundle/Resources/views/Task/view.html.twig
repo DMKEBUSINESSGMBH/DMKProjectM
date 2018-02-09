@@ -11,11 +11,11 @@
         {# Button for add context on the activity list item view page #}
         {{ AC.addContextButton(entity) }}
         {{ UI.editButton({
-            'path' : path('dmkprojectm_task_update', { id: entity.id }),
+            'path' : path('projectm_task_update', { id: entity.id }),
             'entity_label': 'dmkprojectm.task.entity_label'|trans
         }) }}
     {% endif %}
-    {% if is_granted('DELETE', entity) %}
+    {#% if is_granted('DELETE', entity) %}
         {{ UI.deleteButton({
             'dataUrl': path('projectm_api_delete_task', {'id': entity.id}),
             'dataRedirect': path('projectm_task_index'),
@@ -24,7 +24,7 @@
             'dataId': entity.id,
             'entity_label': 'dmkprojectm.task.entity_label'|trans
         }) }}
-    {% endif %}
+    {% endif %#}
 {% endblock navButtons %}
 
 {% block stats %}
@@ -37,7 +37,7 @@
 {% block pageHeader %}
     {% set breadcrumbs = {
         'entity': entity,
-        'indexPath': path('oro_task_index'),
+        'indexPath': path('projectm_task_index'),
         'indexLabel': 'dmkprojectm.task.entity_plural_label'|trans,
         'entityTitle': entity.subject
     } %}

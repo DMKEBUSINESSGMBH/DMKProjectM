@@ -39,6 +39,7 @@ class TaskType extends AbstractType
                 ]
             );
         $this->addDueDateField($builder);
+        $this->addStartDateField($builder);
         $builder
             ->add(
                 'status',
@@ -116,6 +117,22 @@ class TaskType extends AbstractType
     /**
      * @param FormBuilderInterface $builder
      */
+    protected function addStartDateField(FormBuilderInterface $builder)
+    {
+        $builder
+        ->add(
+            'startDate',
+            'oro_datetime',
+            [
+                'required' => false,
+                'label' => 'dmkprojectm.task.start_date.label',
+            ]
+            );
+    }
+
+    /**
+     * @param FormBuilderInterface $builder
+     */
     protected function addDueDateField(FormBuilderInterface $builder)
     {
         $builder
@@ -124,7 +141,7 @@ class TaskType extends AbstractType
                 'oro_datetime',
                 [
                     'required' => false,
-                    'label' => 'projectm.task.due_date.label',
+                    'label' => 'dmkprojectm.task.due_date.label',
                     'constraints' => [
                         $this->getDueDateValidationConstraint(new \DateTime('now', new \DateTimeZone('UTC')))
                     ]
