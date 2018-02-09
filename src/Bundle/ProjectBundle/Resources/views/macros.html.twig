@@ -1,0 +1,77 @@
+{#
+    Render page scrollable data
+    params:
+        configTree       - tree of current configuration
+        form             - form view of active group
+        activeTabName    - active tab name
+        activeSubTabName - active subtab name
+        routeName        - route name for tabs switch
+        routeParameters  - additional route parameters
+#}
+{% macro renderScrollData(configTree, form, activeTabName = false, activeSubTabName = false, routeName = 'oro_config_configuration_system', routeParameters = {}) %}
+    {{ _self.renderConfigurationScrollData({
+        configTree: configTree,
+        form: form,
+        content: {},
+        activeTabName: activeTabName,
+        activeSubTabName: activeSubTabName,
+        routeName: routeName,
+        routeParameters: routeParameters
+    }) }}
+{% endmacro %}
+
+{% macro renderConfigurationScrollData(data) %}
+    {% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{#    {% set content %}
+        <div data-page-component-view="{{ {
+            view: 'oroui/js/app/views/highlight-text-view',
+            highlightSelectors: [
+                'div.system-configuration-content-title',
+                'h5.user-fieldset span',
+                'div.control-label label',
+                'i.tooltip-icon',
+                'div.controls > div.control-subgroup *[data-name="field__value"]'
+            ],
+            toggleSelectors: {
+                'div.control-group': 'div.control-group-wrapper',
+                'fieldset.form-horizontal': 'div.system-configuration-content-inner'
+            },
+            viewGroup: 'configuration'
+        }|json_encode }}">
+            {{ _self.renderTabContent(data.form, data.content) }}
+        </div>
+    {% endset %}#}
+    <div class="system-configuration-container">
+        {% embed "OroUIBundle::content_sidebar.html.twig" with {options: {
+            scrollbar: '[data-role="jstree-container"]'
+        }} %}
+            {% block header %}
+                <div id="system-configuration-jstree-inline-actions"></div>
+            {% endblock header %}
+            {% block sidebar %}
+                {{ UI.renderJsTree({
+                    'label': null,
+                    'treeOptions': {
+                        'data' : data.configTree,
+                        'viewGroup': 'configuration',
+                        'nodeId': data.activeSubTabName,
+                        'onSelectRoute': data.routeName,
+                        'onSelectRouteParameters': data.routeParameters,
+                        'view': 'dmkprojectm/js/app/views/task-tree-view'
+                    },
+                    'actionsOptions': {
+                        inlineActionsCount: 2,
+                        inlineActionsElement: '#system-configuration-jstree-inline-actions'
+                    }
+                }) }}
+            {% endblock sidebar %}
+
+            {% block content %}
+                {% autoescape %}
+                    {{ content }}
+                {% endautoescape %}
+            {% endblock content %}
+        {% endembed %}
+    </div>
+{% endmacro %}
