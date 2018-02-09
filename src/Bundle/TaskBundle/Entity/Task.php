@@ -2,6 +2,7 @@
 
 namespace DMKProjectM\Bundle\TaskBundle\Entity;
 
+use DMKProjectM\Bundle\ProjectBundle\Entity\Project;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,8 +15,6 @@ use Oro\Bundle\OrganizationBundle\Entity\Organization;
 use Oro\Bundle\ReminderBundle\Entity\RemindableInterface;
 use Oro\Bundle\ReminderBundle\Model\ReminderData;
 use Oro\Bundle\UserBundle\Entity\User;
-use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
-use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
 
 use DMKProjectM\Bundle\TaskBundle\Model\ExtendTask;
 
@@ -172,7 +171,7 @@ class Task extends ExtendTask implements RemindableInterface, DatesAwareInterfac
      * @var Task
      *
      * @ORM\ManyToOne(targetEntity="DMKProjectM\Bundle\TaskBundle\Entity\Task")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      * @ConfigField(
      *      defaultValues={
      *          "dataaudit"={
@@ -184,7 +183,7 @@ class Task extends ExtendTask implements RemindableInterface, DatesAwareInterfac
     protected $parent;
 
     /**
-     * @var Task
+     * @var Project
      *
      * @ORM\ManyToOne(targetEntity="DMKProjectM\Bundle\ProjectBundle\Entity\Project")
      * @ORM\JoinColumn(name="project", referencedColumnName="id", onDelete="SET NULL")
