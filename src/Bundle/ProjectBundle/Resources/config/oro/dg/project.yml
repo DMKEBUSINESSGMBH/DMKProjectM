@@ -25,3 +25,22 @@ datagrids:
             columns:
                 name:
                     data_name: p.name
+        properties:
+            id: ~
+            update_link:
+                type:       url
+                route:      projectm_project_project_update
+                params:     [ id ]
+        actions:
+            update:
+                type: dialog
+                label: oro.grid.action.update
+                icon: edit
+                link: update_link
+                widgetOptions:
+                    reload-grid-name: projectm-project-project-grid
+                    options:
+                        dialogOptions:
+                            title:  "Update Project"
+                            modal:  true
+                            width:  500
