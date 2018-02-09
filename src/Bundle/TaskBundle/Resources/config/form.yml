@@ -1,8 +1,8 @@
 parameters:
-    projectm_task.form.type.task.class:               Oro\Bundle\TaskBundle\Form\Type\TaskType
-    projectm_task.form.type.task_api.class:           Oro\Bundle\TaskBundle\Form\Type\TaskApiType
-    projectm_task.form.handler.task.class:            Oro\Bundle\TaskBundle\Form\Handler\TaskHandler
-    projectm_task.form.handler.task_api.class:        Oro\Bundle\TaskBundle\Form\Handler\TaskApiHandler
+    projectm_task.form.type.task.class:               DMKProjectM\Bundle\TaskBundle\Form\Type\TaskType
+    projectm_task.form.type.task_api.class:           DMKProjectM\Bundle\TaskBundle\Form\Type\TaskApiType
+    projectm_task.form.handler.task.class:            DMKProjectM\Bundle\TaskBundle\Form\Handler\TaskHandler
+    projectm_task.form.handler.task_api.class:        DMKProjectM\Bundle\TaskBundle\Form\Handler\TaskApiHandler
 
 services:
     projectm_task.form.type.task:

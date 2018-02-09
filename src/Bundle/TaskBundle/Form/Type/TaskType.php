@@ -27,7 +27,7 @@ class TaskType extends AbstractType
                 'text',
                 [
                     'required' => true,
-                    'label' => 'orocrm.task.subject.label'
+                    'label' => 'dmkprojectm.task.subject.label'
                 ]
             )
             ->add(
@@ -35,7 +35,7 @@ class TaskType extends AbstractType
                 'oro_resizeable_rich_text',
                 [
                     'required' => false,
-                    'label' => 'orocrm.task.description.label'
+                    'label' => 'dmkprojectm.task.description.label'
                 ]
             );
         $this->addDueDateField($builder);
@@ -44,8 +44,8 @@ class TaskType extends AbstractType
                 'status',
                 'oro_enum_select',
                 [
-                    'label' => 'orocrm.task.status.label',
-                    'enum_code' => 'task_status',
+                    'label' => 'dmkprojectm.task.status.label',
+                    'enum_code' => Task::INTERNAL_ENUM_CODE_STATUS,
                     'required' => true,
                     'constraints' => [new Assert\NotNull()]
                 ]
@@ -54,7 +54,7 @@ class TaskType extends AbstractType
                 'taskPriority',
                 'translatable_entity',
                 [
-                    'label' => 'orocrm.task.task_priority.label',
+                    'label' => 'dmkprojectm.task.task_priority.label',
                     'class' => 'DMKProjectM\Bundle\TaskBundle\Entity\TaskPriority',
                     'required' => true,
                     'query_builder' => function (EntityRepository $repository) {
