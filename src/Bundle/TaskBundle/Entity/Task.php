@@ -171,7 +171,7 @@ class Task extends ExtendTask implements RemindableInterface, DatesAwareInterfac
      * @var Task
      *
      * @ORM\ManyToOne(targetEntity="DMKProjectM\Bundle\TaskBundle\Entity\Task")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
      * @ConfigField(
      *      defaultValues={
      *          "dataaudit"={

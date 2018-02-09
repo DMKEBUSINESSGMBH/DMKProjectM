@@ -210,7 +210,7 @@ class DMKProjectMTaskBundleInstaller implements
             $schema->getTable('projectm_task'),
             ['parent_id'],
             ['id'],
-            ['onUpdate' => null, 'onDelete' => 'CASCADE']
+            ['onUpdate' => null, 'onDelete' => 'SET NULL']
             );
         $table->addForeignKeyConstraint(
             $schema->getTable('projectm_task_priority'),
