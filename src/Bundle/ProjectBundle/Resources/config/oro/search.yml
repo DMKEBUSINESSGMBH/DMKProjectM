@@ -1,0 +1,14 @@
+search:
+    DMKProjectM\Bundle\ProjectBundle\Entity\Project:
+        alias: projectm_project
+        label: dmkprojectm.project.entity_plural_label
+        route:
+            name: projectm_project_view
+            parameters:
+                id: id
+        search_template: DMKProjectMProjectBundle:Project:searchResult.html.twig
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]

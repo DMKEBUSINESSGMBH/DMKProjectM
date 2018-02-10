@@ -1,6 +1,7 @@
 parameters:
     projectm_task.form.type.task.class:               DMKProjectM\Bundle\TaskBundle\Form\Type\TaskType
     projectm_task.form.type.task_api.class:           DMKProjectM\Bundle\TaskBundle\Form\Type\TaskApiType
+    projectm_task.form.type.task_select.class:        DMKProjectM\Bundle\TaskBundle\Form\Type\TaskSelectType
     projectm_task.form.handler.task.class:            DMKProjectM\Bundle\TaskBundle\Form\Handler\TaskHandler
     projectm_task.form.handler.task_api.class:        DMKProjectM\Bundle\TaskBundle\Form\Handler\TaskApiHandler
     projectm_task.manager.api.class:                  Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
@@ -23,6 +24,13 @@ services:
         arguments:
             - 'projectm_task'
             - 'projectm_task'
+
+    projectm_task.form.type.task_select:
+        class: %projectm_task.form.type.task_select.class%
+        arguments:
+            - '@doctrine'
+        tags:
+            - { name: form.type, alias: projectm_task_select }
 
     projectm_task.form.api:
         class: Symfony\Component\Form\Form

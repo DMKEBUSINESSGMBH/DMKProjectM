@@ -46,7 +46,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/create", name="projectm_project_project_create")
+     * @Route("/create", name="projectm_project_project_create",options={"expose"=true})
      * @Template("@DMKProjectMProject/Project/widget/update.html.twig")
      * @Acl(
      *      id="projectm_project_project_create",

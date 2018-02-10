@@ -10,3 +10,10 @@ services:
         arguments:
             - "projectm_project_form"
             - "projectm_project"
+
+    projectm_task.form.type.project_select:
+        class: DMKProjectM\Bundle\ProjectBundle\Form\Type\ProjectSelectType
+        arguments:
+            - '@doctrine'
+        tags:
+            - { name: form.type, alias: projectm_project_select }

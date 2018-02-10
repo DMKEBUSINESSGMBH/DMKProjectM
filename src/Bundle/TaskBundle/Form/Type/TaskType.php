@@ -51,6 +51,23 @@ class TaskType extends AbstractType
                     'constraints' => [new Assert\NotNull()]
                 ]
             )
+
+            ->add(
+                'project',
+                'projectm_project_select',
+                [
+                    'label' => 'dmkprojectm.task.project.label',
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'parent',
+                'projectm_task_select',
+                [
+                    'label' => 'dmkprojectm.task.parent.label',
+                    'required' => false,
+                ]
+            )
             ->add(
                 'taskPriority',
                 'translatable_entity',

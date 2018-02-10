@@ -8,3 +8,11 @@ services:
         arguments:
             - '%projectm.project.project.class%'
             - "@doctrine.orm.entity_manager"
+
+    projectm.project.form.autocomplete.project.search_handler:
+        parent: oro_form.autocomplete.search_handler
+        arguments:
+            - "%projectm.project.project.class%"
+            - ["name"]
+        tags:
+            - { name: oro_form.autocomplete.search_handler, alias: projectm_projects, acl_resource: projectm_project_view }

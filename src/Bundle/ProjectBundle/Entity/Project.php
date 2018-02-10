@@ -32,7 +32,11 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
  *              "category"="projectm_management"
  *          },
  *          "grid"={
- *              "default"="projectm-base-grid"
+ *              "default"="projectm-project-project-grid"
+ *          },
+ *          "form"={
+ *              "grid_name"="projectm-project-project-grid",
+ *              "form_type"="projectm_project_select"
  *          },
  *          "tag"={"enabled"=true}
  *      }

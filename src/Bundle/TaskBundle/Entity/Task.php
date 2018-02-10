@@ -266,6 +266,7 @@ class Task extends ExtendTask implements RemindableInterface, DatesAwareInterfac
      */
     protected $updatedAtSet;
 
+
     public function __construct()
     {
         parent::__construct();
@@ -383,6 +384,38 @@ class Task extends ExtendTask implements RemindableInterface, DatesAwareInterfac
     public function setTaskPriority($taskPriority)
     {
         $this->taskPriority = $taskPriority;
+    }
+
+    /**
+     * @return \DMKProjectM\Bundle\TaskBundle\Entity\Task
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @return \DMKProjectM\Bundle\ProjectBundle\Entity\Project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param \DMKProjectM\Bundle\TaskBundle\Entity\Task $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @param \DMKProjectM\Bundle\ProjectBundle\Entity\Project $project
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
     }
 
     /**
