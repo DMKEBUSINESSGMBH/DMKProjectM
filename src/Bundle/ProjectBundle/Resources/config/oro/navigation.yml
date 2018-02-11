@@ -5,7 +5,19 @@ navigation:
                 uri: '#'
                 label: 'ProjectM'
                 position: 10
+            projectm_project_list:
+                label: 'dmkprojectm.project.entity_plural_label'
+                route: 'projectm_project_project_index'
+                position: 5
         tree:
             application_menu:
                 children:
                     dmkprojectm_tab:
+                        children:
+                            projectm_project_list: ~
+
+    titles:
+        projectm_project_project_index: ~
+        projectm_project_project_view: '%entity.name%'
+        projectm_project_project_create: oro.ui.create_entity
+        projectm_project_project_update: '%entity.name% - Edit'
