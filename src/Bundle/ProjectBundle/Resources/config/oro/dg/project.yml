@@ -43,4 +43,4 @@ datagrids:
                         dialogOptions:
                             title:  "Update Project"
                             modal:  true
-                            width:  500
+                            width:  600
