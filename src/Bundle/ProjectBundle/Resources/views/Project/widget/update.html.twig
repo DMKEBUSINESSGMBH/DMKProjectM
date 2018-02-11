@@ -1,4 +1,6 @@
 {% extends '@EHDevBasics/Widgets/formWidget.html.twig' %}
 
-{% set pathUpdate = path('projectm_project_project_update', { id: form.vars.value.id}) %}
 {% set pathCreate = path('projectm_project_project_create') %}
+{% if form.vars.value.id is not null %}
+    {% set pathUpdate = path('projectm_project_project_update', { id: form.vars.value.id}) %}
+{% endif %}
