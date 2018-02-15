@@ -55,9 +55,9 @@
                     'treeOptions': {
                         'data' : data.configTree,
                         'viewGroup': 'configuration',
-                        'nodeId': data.activeSubTabName,
-                        'onSelectRoute': data.routeName,
-                        'onSelectRouteParameters': data.routeParameters,
+                        'nodeId': '',
+                        'onSelectRoute': '',
+                        'onSelectRouteParameters': '',
                         'view': 'dmkprojectm/js/app/views/task-tree-view'
                     },
                     'actionsOptions': {
@@ -67,11 +67,6 @@
                 }) }}
             {% endblock sidebar %}
 
-            {% block content %}
-                {% autoescape %}
-                    {{ content }}
-                {% endautoescape %}
-            {% endblock content %}
         {% endembed %}
     </div>
 {% endmacro %}

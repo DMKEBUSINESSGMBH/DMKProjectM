@@ -83,7 +83,14 @@ class TaskController extends Controller
      */
     public function viewAction(Task $task)
     {
-        return array('entity' => $task);
+        //TODO: get TaskTree
+        $jsTaskTree = [];
+        //$jsTaskTree = $this->get('task tree provider')->createTree($root, true);
+
+        return [
+            'jsTree' => $jsTaskTree,
+            'entity' => $task
+        ];
     }
 
     /**

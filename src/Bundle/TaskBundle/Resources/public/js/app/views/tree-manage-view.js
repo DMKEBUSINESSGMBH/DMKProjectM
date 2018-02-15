@@ -7,9 +7,9 @@ define(function(require) {
     var BaseTreeManageView = require('oroui/js/app/views/jstree/base-tree-manage-view');
 
     /**
-     * @export dmkprojectm/js/app/views/tree-manage-view
+     * @export dmkprojectmtask/js/app/views/tree-manage-view
      * @extends oroui.app.components.BaseTreeManageView
-     * @class dmkprojectm.app.components.TreeManageView
+     * @class dmkprojectmtask.app.components.TreeManageView
      */
     TreeManageView = BaseTreeManageView.extend({
         /**

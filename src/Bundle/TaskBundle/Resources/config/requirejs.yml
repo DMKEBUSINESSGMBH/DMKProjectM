@@ -1,0 +1,4 @@
+config:
+    paths:
+        'dmkprojectm/js/app/views/product-sidebar-view': 'bundles/dmkprojectmtask/js/app/views/task-tree-view.js'
+        'dmkprojectm/js/app/views/tree-manage-view': 'bundles/dmkprojectmtast/js/app/views/tree-manage-view.js'

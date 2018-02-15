@@ -1,0 +1,112 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'DMKProjectMTaskBundle::macros.html.twig' as ProjectUI %}
+
+{% oro_title_set({params : {"%name%": 'dmkprojectm.task.entity_plural_label'|trans} }) %}
+{% set name = app.user|oro_format_name|default('N/A') %}
+
+{% block content_data %}
+
+    {% set id = 'task-view' %}
+    {% set treeData = [{
+        'id': 'first_elem',
+        'text': 'Genesis',
+        'icon': 'fa-desktop',
+        'parent': '#',
+        'priority': 0,
+        'search_by': [
+            'test1',
+            'test2',
+        ]
+    },{
+        'id': 'snd_elem',
+        'text': '1st Element',
+        'icon': 'fa-desktop',
+        'parent': 'first_elem',
+        'priority': 0,
+        'search_by': [
+            'test1ss',
+            'test2s',
+        ]
+    },{
+        'id': 'snd_elem2',
+        'text': '2st Element',
+        'icon': 'fa-desktop',
+        'parent': 'first_elem',
+        'priority': 0,
+        'search_by': [
+            'test1ss',
+            'test2s',
+        ]
+    },
+
+
+    ] %}
+    {#{{ dump(treeData) }}#}
+    {#{{ dump(jsTree) }}#}
+
+    {% set foobar ='
+        <div id="projectm-task">
+            projectm
+        </div>'
+    %}
+
+    {% set data = {
+        'dataBlocks': [
+            {
+                'title': 'General'|trans,
+                'class': 'active',
+                'subblocks': [
+                {
+                    'title': null,
+                    'useSpan': false,
+                    'data': [
+                        foobar
+                    ]
+                }
+            ]
+            }
+        ]
+    } %}
+    {# entityId ? entityId : parentCategoryId, #}
+
+    {% set treeOptions = {
+        'view' : 'dmkprojectmtask/js/app/views/tree-manage-view',
+        'key' : 'projectm-task',
+        'data' : treeData,
+        'nodeId' : 1,
+        'updateAllowed' : true,
+        'onSelectRoute' : 'projectm_task_view',
+        'onMoveRoute' : 'projectm_task_move'
+    } %}
+
+    {% set twoColumnContent = parent() %}
+
+    <div class="sidebar-container">
+        {% embed "OroUIBundle::content_sidebar.html.twig" with {options: {
+            scrollbar: '[data-role="jstree-container"]'
+        }} %}
+            {% block sidebar %}
+                {{ UI.renderJsTree(
+                    {
+                        'label': 'dmkprojectm.task.task.entity_plural_label'|trans,
+                        'treeOptions': treeOptions
+                    },
+                    {
+                        'move': {
+                        'routeName': 'projectm_task_move_form'
+                    }
+                    }
+                ) }}
+            {% endblock sidebar %}
+
+            {% block content %}
+                {% autoescape %}
+                    <div class="task-data">
+                        {{ twoColumnContent|raw}}
+                    </div>
+                {% endautoescape %}
+            {% endblock content %}
+        {% endembed %}
+    </div>
+{% endblock content_data %}
