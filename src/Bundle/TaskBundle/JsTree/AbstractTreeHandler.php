@@ -3,7 +3,12 @@
 namespace DMKProjectM\TaskBundle\JsTree;
 
 
-class AbstractTreeHandler
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use Oro\Bundle\UIBundle\Model\TreeItem;
+
+abstract class AbstractTreeHandler
 {
     const ROOT_PARENT_VALUE = '#';
     const SUCCESS_STATUS = true;
